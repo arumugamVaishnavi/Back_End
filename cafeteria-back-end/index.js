@@ -8,24 +8,28 @@ const helmet  = require('helmet')
 
 // JSfiles
 const productRoute = require('./routes/usersRoutes')
+const usersRoutes = require('./routes/usersRoutes')
 require ('dotenv').config({path:'./config/.env'})
 require('./config/db');
 
 //routes
-//var usersSchema = require ('../models/usersSchema');
-// app.use('/api/userRatings', userRoutes);
-
+app.use('/users', usersRoutes)
 //Actions
 app.use(morgan('dev'))
 app.use(cors())
 app.use(helmet())
 app.use(express.json());
-app.listen(process.env.PORT, ()=>{
-    console.log('bing successfully');
-})
+
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.status(200).send('<h1>It works !</h1>')
 })
-//app.use('/users', usersRoute)
+app.get('/', (req, res) => {
+    res.status(200).send('<h1>It works !</h1>')
+})
+
+
+app.listen(process.env.PORT, ()=>{
+    console.log('bing successfully');
+})

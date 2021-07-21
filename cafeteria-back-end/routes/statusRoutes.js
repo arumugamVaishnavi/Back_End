@@ -4,24 +4,24 @@ const router = express.Router()
 const { v4: uuidv4 } = require('uuid')
 
 //JSfiles
-const usersModel = require('../model/usersSchema')
-let users = []
+const statusModel = require('../model/statusSchema')
+let status = []
 router.get('/', (req, res, next) => {
-    usersModel.find()
-    .then(users => {
-        res.status(200).send(users);
+    statusModel.find()
+    .then(status => {
+        res.status(200).send(status);
     })
     .catch(error => next(error))
 })
 
 router.get('/:id', (req, res, next) => {
-    const userId = req.params.userId
+    const statusId = req.params.statusId
 
-    usersModel.findOne({
-        _id: userId
+    statusModel.findOne({
+        _id: statusId
     })
-    .then(users => {
-        res.status(200).send(users)
+    .then(status => {
+        res.status(200).send(status)
     })
     .catch(error => next(error))
 
@@ -31,9 +31,9 @@ router.get('/:id', (req, res, next) => {
 router.post('/', function (req, res, next) {
    
 
-    let user = new usersModel({
+    let status = new statusModel({
     id:req.body.id,
-    userName: req.body.userName,
+    statusName: req.body.statusName,
 	password: req.body.password,
 	email: req.body.email,
 	address: req.body.address,
@@ -44,14 +44,14 @@ router.post('/', function (req, res, next) {
 })
 
 
-router.put('/:userId', function (req, res, next) {
-    const userId = req.params.userId
+router.put('/:statusId', function (req, res, next) {
+    const statusId = req.params.statusId
     
-   usersModel.findOneAndUpdate({
-        _id: userId
+    productModel.findOneAndUpdate({
+        _id: statusId
     }, {
         id:req.body.id,
-    userName: req.body.userName,
+        statusName: req.body.statusName,
 	password: req.body.password,
 	email: req.body.email,
 	address: req.body.address,
@@ -59,19 +59,19 @@ router.put('/:userId', function (req, res, next) {
 	type: req.body.type,
 	comment: req.body.comment
     })
-    .then(users => res.status(200).send(users))
+    .then(status => res.status(200).send(status))
     .catch(error => next(error))
     
    
 })
 
-router.delete('/:userId', function (req, res, next) {
-    const userId = req.params.userId
+router.delete('/:statusId', function (req, res, next) {
+    const statusId = req.params.productId
     
-    usersModel.findOneAndDelete({
-        _id: userId
-    }).then(users => {
-        res.status(200).send('user well deleted !')
+    statusModel.findOneAndDelete({
+        _id: statusId
+    }).then(status => {
+        res.status(200).send('Product well deleted !')
     })
     .catch(error => next(error))
 

@@ -4,24 +4,24 @@ const router = express.Router()
 const { v4: uuidv4 } = require('uuid')
 
 //JSfiles
-const usersModel = require('../model/usersSchema')
-let users = []
+const rateModel = require('../model/rateSchema')
+let rate = []
 router.get('/', (req, res, next) => {
-    usersModel.find()
-    .then(users => {
-        res.status(200).send(users);
+    rateModel.find()
+    .then(rate => {
+        res.status(200).send(rate);
     })
     .catch(error => next(error))
 })
 
 router.get('/:id', (req, res, next) => {
-    const userId = req.params.userId
+    const rateId = req.params.rateId
 
-    usersModel.findOne({
-        _id: userId
+    rateModel.findOne({
+        _id: rateId
     })
-    .then(users => {
-        res.status(200).send(users)
+    .then(rate => {
+        res.status(200).send(rate)
     })
     .catch(error => next(error))
 
@@ -31,9 +31,9 @@ router.get('/:id', (req, res, next) => {
 router.post('/', function (req, res, next) {
    
 
-    let user = new usersModel({
+    let rate = new rateModel({
     id:req.body.id,
-    userName: req.body.userName,
+    rateName: req.body.rateName,
 	password: req.body.password,
 	email: req.body.email,
 	address: req.body.address,
@@ -44,14 +44,14 @@ router.post('/', function (req, res, next) {
 })
 
 
-router.put('/:userId', function (req, res, next) {
-    const userId = req.params.userId
+router.put('/:rateId', function (req, res, next) {
+    const rateId = req.params.rateId
     
-   usersModel.findOneAndUpdate({
-        _id: userId
+    rateModel.findOneAndUpdate({
+        _id: rateId
     }, {
         id:req.body.id,
-    userName: req.body.userName,
+        rateName: req.body.rateName,
 	password: req.body.password,
 	email: req.body.email,
 	address: req.body.address,
@@ -59,19 +59,19 @@ router.put('/:userId', function (req, res, next) {
 	type: req.body.type,
 	comment: req.body.comment
     })
-    .then(users => res.status(200).send(users))
+    .then(rate => res.status(200).send(rate))
     .catch(error => next(error))
     
    
 })
 
-router.delete('/:userId', function (req, res, next) {
-    const userId = req.params.userId
+router.delete('/:rateId', function (req, res, next) {
+    const rateId = req.params.rateId
     
-    usersModel.findOneAndDelete({
-        _id: userId
-    }).then(users => {
-        res.status(200).send('user well deleted !')
+    rateModel.findOneAndDelete({
+        _id: rateId
+    }).then(rate => {
+        res.status(200).send('rate well deleted !')
     })
     .catch(error => next(error))
 

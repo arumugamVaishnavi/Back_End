@@ -4,24 +4,24 @@ const router = express.Router()
 const { v4: uuidv4 } = require('uuid')
 
 //JSfiles
-const usersModel = require('../model/usersSchema')
-let users = []
+const itemsModel = require('../model/itemsSchema')
+let items = []
 router.get('/', (req, res, next) => {
-    usersModel.find()
-    .then(users => {
-        res.status(200).send(users);
+    itemsModel.find()
+    .then(items => {
+        res.status(200).send(items);
     })
     .catch(error => next(error))
 })
 
 router.get('/:id', (req, res, next) => {
-    const userId = req.params.userId
+    const itemsId = req.params.itemsId
 
-    usersModel.findOne({
-        _id: userId
+    itemsModel.findOne({
+        _id: itemsId
     })
-    .then(users => {
-        res.status(200).send(users)
+    .then(items => {
+        res.status(200).send(items)
     })
     .catch(error => next(error))
 
@@ -31,9 +31,9 @@ router.get('/:id', (req, res, next) => {
 router.post('/', function (req, res, next) {
    
 
-    let user = new usersModel({
+    let items = new itemsModel({
     id:req.body.id,
-    userName: req.body.userName,
+    itemsName: req.body.itemsName,
 	password: req.body.password,
 	email: req.body.email,
 	address: req.body.address,
@@ -44,14 +44,14 @@ router.post('/', function (req, res, next) {
 })
 
 
-router.put('/:userId', function (req, res, next) {
-    const userId = req.params.userId
+router.put('/:itemsId', function (req, res, next) {
+    const itemsId = req.params.itemsId
     
-   usersModel.findOneAndUpdate({
-        _id: userId
+    itemsModel.findOneAndUpdate({
+        _id: itemsId
     }, {
         id:req.body.id,
-    userName: req.body.userName,
+        itemsName: req.body.itemsName,
 	password: req.body.password,
 	email: req.body.email,
 	address: req.body.address,
@@ -59,19 +59,19 @@ router.put('/:userId', function (req, res, next) {
 	type: req.body.type,
 	comment: req.body.comment
     })
-    .then(users => res.status(200).send(users))
+    .then(items => res.status(200).send(items))
     .catch(error => next(error))
     
    
 })
 
-router.delete('/:userId', function (req, res, next) {
-    const userId = req.params.userId
+router.delete('/:itemsId', function (req, res, next) {
+    const itemsId = req.params.itemsId
     
-    usersModel.findOneAndDelete({
-        _id: userId
-    }).then(users => {
-        res.status(200).send('user well deleted !')
+    itemsModel.findOneAndDelete({
+        _id:itemsId
+    }).then(items => {
+        res.status(200).send('items well deleted !')
     })
     .catch(error => next(error))
 

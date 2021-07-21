@@ -1,15 +1,11 @@
 const mongoose = require("mongoose");
 
-const payementSchema = new mongoose.Schema({
-    ID_payement: {
+const rateSchema = new mongoose.Schema({
+    id_rate: {
         type: Number,
         require: true,
     },
-    Method: {
-        type: String,
-        require: true
-    },
-    Description: {
+    rate_name: {
         type: String,
         require: true
     }
@@ -21,4 +17,4 @@ const payementSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('payement', payementSchema)
+module.exports = mongoose.model('rate', rateSchema)
