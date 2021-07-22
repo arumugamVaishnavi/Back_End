@@ -32,15 +32,19 @@ router.post('/', function (req, res, next) {
    
 
     let headOrder = new headOrderModel({
-    id:req.body.id,
-    headOrderName: req.body.headOrderName,
-	password: req.body.password,
-	email: req.body.email,
-	address: req.body.address,
-	phone: req.body.phone,
-	type: req.body.type,
-	comment: req.body.comment
+    id_head_order:req.body.id_head_order,
+    Total_number: req.body.Total_number,
+	Total_price: req.body.Total_price,
+	id_payement: req.body.id_payement,
+	id_user: req.body.id_user,
+	order_time: req.body.order_time,
+	id_histo_status: req.body.id_histo_status,
+	comment: req.body.comment,
+    id_dish: req.body.id_dish
     })
+    headOrder.save()
+    .then(headOrder =>{res.status(200).send(headOrder)})
+    .catch(error=>{next(error)})
 })
 
 

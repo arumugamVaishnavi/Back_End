@@ -4,12 +4,15 @@ const app = express();
 const morgan  = require('morgan')
 const cors    = require('cors')
 const helmet  = require('helmet')
-// const { MongoClient } = require('mongodb');
+
 
 // JSfiles
 
 
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
 require ('dotenv').config({path:'./config/.env'})
 require('./config/db');
 
@@ -26,7 +29,6 @@ const categoryRoutes = require('./routes/categoryRoutes')
 app.use('/users', usersRoutes)
 app.use('/status',statusRoutes)
 app.use('/rate',rateRoutes)
-app.use('/rate', rateRoutes)
 app.use('/headOrder', headOrderRoutes)
 app.use('/category', categoryRoutes)
 app.use('/historyStatus', historyStatusRoutes)
@@ -34,8 +36,7 @@ app.use('/payement', payementRoutes)
 app.use('/items', itemsRoutes)
 
 //Actions
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+
 app.use(morgan('dev'))
 app.use(cors())
 app.use(helmet())

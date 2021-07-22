@@ -34,7 +34,9 @@ const usersModel = new mongoose.Schema({
         require: true
     }
 
-}, {
+}
+, {
+    //versionKey: false
     timestamps: {
         createdAt: 'created_at',
         updatedAt: 'updated_at'

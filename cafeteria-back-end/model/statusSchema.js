@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const statusModel = new mongoose.Schema({
-    ID_status: {
+    id: {
         type: Number,
         require: true,
     },

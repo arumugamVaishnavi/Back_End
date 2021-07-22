@@ -28,7 +28,7 @@ router.get('/:id', (req, res, next) => {
 })
 
 
-router.post('/addUser', function (req, res, next) {
+router.post('/', function (req, res, next) {
    
 
     let users = new usersModel({
@@ -43,7 +43,9 @@ router.post('/addUser', function (req, res, next) {
     })
     users.save()
     .then(users =>{res.status(200).send(users)})
-    .catch(error=>{next(error)})
+    .catch(error=>{next(error)});
+
+    res.status(200).send(users)
 
 })
 

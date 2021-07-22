@@ -28,19 +28,15 @@ router.get('/:id', (req, res, next) => {
 })
 
 
-router.post('/rate', function (req, res, next) {
+router.post('/', function (req, res, next) {
    
 
     let rate = new rateModel({
-    id:req.body.id,
-    rateName: req.body.rateName,
-	password: req.body.password,
-	email: req.body.email,
-	address: req.body.address,
-	phone: req.body.phone,
-	type: req.body.type,
-	comment: req.body.comment
+    id_rate:req.body.id_rate
     })
+    rate.save()
+    .then(rate =>{res.status(200).send(rate)})
+    .catch(error=>{next(error)})
 })
 
 

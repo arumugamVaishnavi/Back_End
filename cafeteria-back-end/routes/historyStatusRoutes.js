@@ -32,15 +32,13 @@ router.post('/', function (req, res, next) {
    
 
     let historyStatus = new historyStatusModel({
-    id:req.body.id,
-    historyStatusName: req.body.historyStatusName,
-	password: req.body.password,
-	email: req.body.email,
-	address: req.body.address,
-	phone: req.body.phone,
-	type: req.body.type,
+    id_histo_status:req.body.id_histo_status,
+    id_status: req.body.id_status,
 	comment: req.body.comment
     })
+    historyStatus.save()
+    .then(historyStatus =>{res.status(200).send(historyStatus)})
+    .catch(error=>{next(error)})
 })
 
 

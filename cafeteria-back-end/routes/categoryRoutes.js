@@ -32,15 +32,12 @@ router.post('/', function (req, res, next) {
    
 
     let category = new categoryModel({
-    id:req.body.id,
-    categoryName: req.body.categoryName,
-	password: req.body.password,
-	email: req.body.email,
-	address: req.body.address,
-	phone: req.body.phone,
-	type: req.body.type,
-	comment: req.body.comment
+    id_category:req.body.id_category,
+    categoryName: req.body.categoryName
     })
+    category.save()
+    .then(category =>{res.status(200).send(category)})
+    .catch(error=>{next(error)})
 })
 
 

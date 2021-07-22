@@ -33,14 +33,15 @@ router.post('/', function (req, res, next) {
 
     let status = new statusModel({
     id:req.body.id,
-    statusName: req.body.statusName,
-	password: req.body.password,
-	email: req.body.email,
-	address: req.body.address,
-	phone: req.body.phone,
-	type: req.body.type,
-	comment: req.body.comment
+    status_name: req.body.status_name,
+	Description: req.body.Description,
+	Comment: req.body.Comment
     })
+    status.save()
+    .then(status =>{res.status(200).send(status)})
+    .catch(error=>{next(error)})
+
+
 })
 
 

@@ -32,15 +32,15 @@ router.post('/', function (req, res, next) {
    
 
     let payement = new payementModel({
-    id:req.body.id,
+    ID_payement:req.body.ID_payement,
     payementName: req.body.payementName,
-	password: req.body.password,
-	email: req.body.email,
-	address: req.body.address,
-	phone: req.body.phone,
-	type: req.body.type,
-	comment: req.body.comment
+	Method: req.body.Method,
+	Description: req.body.Description
+	
     })
+    payement.save()
+    .then(payement =>{res.status(200).send(payement)})
+    .catch(error=>{next(error)})
 })
 
 
