@@ -7,14 +7,35 @@ const helmet  = require('helmet')
 // const { MongoClient } = require('mongodb');
 
 // JSfiles
-const productRoute = require('./routes/usersRoutes')
-const usersRoutes = require('./routes/usersRoutes')
+
+
+const bodyParser = require('body-parser');
 require ('dotenv').config({path:'./config/.env'})
 require('./config/db');
 
+const usersRoutes = require('./routes/usersRoutes')
+const statusRoutes = require('./routes/statusRoutes')
+const rateRoutes = require('./routes/rateRoutes')
+const payementRoutes = require('./routes/payementRoutes')
+const itemsRoutes = require('./routes/itemsRoutes')
+const historyStatusRoutes = require('./routes/historyStatusRoutes')
+const headOrderRoutes = require('./routes/headOrderRoutes')
+const categoryRoutes = require('./routes/categoryRoutes')
+
 //routes
 app.use('/users', usersRoutes)
+app.use('/status',statusRoutes)
+app.use('/rate',rateRoutes)
+app.use('/rate', rateRoutes)
+app.use('/headOrder', headOrderRoutes)
+app.use('/category', categoryRoutes)
+app.use('/historyStatus', historyStatusRoutes)
+app.use('/payement', payementRoutes)
+app.use('/items', itemsRoutes)
+
 //Actions
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(morgan('dev'))
 app.use(cors())
 app.use(helmet())

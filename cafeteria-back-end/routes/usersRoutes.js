@@ -1,7 +1,7 @@
 //libraries
-const express = require('express')
-const router = express.Router()
-const { v4: uuidv4 } = require('uuid')
+const express = require('express');
+const router = express.Router();
+const { v4: uuidv4 } = require('uuid');
 
 //JSfiles
 const usersModel = require('../model/usersSchema')
@@ -28,10 +28,10 @@ router.get('/:id', (req, res, next) => {
 })
 
 
-router.post('/', function (req, res, next) {
+router.post('/addUser', function (req, res, next) {
    
 
-    let user = new usersModel({
+    let users = new usersModel({
     id:req.body.id,
     userName: req.body.userName,
 	password: req.body.password,
@@ -41,7 +41,12 @@ router.post('/', function (req, res, next) {
 	type: req.body.type,
 	comment: req.body.comment
     })
+    users.save()
+    .then(users =>{res.status(200).send(users)})
+    .catch(error=>{next(error)})
+
 })
+
 
 
 router.put('/:userId', function (req, res, next) {
@@ -50,7 +55,7 @@ router.put('/:userId', function (req, res, next) {
    usersModel.findOneAndUpdate({
         _id: userId
     }, {
-        id:req.body.id,
+    id:req.body.id,
     userName: req.body.userName,
 	password: req.body.password,
 	email: req.body.email,

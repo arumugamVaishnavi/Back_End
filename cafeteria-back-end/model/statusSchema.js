@@ -1,15 +1,19 @@
 const mongoose = require("mongoose");
 
-const payementSchema = new mongoose.Schema({
-    ID_payement: {
+const statusModel = new mongoose.Schema({
+    ID_status: {
         type: Number,
         require: true,
     },
-    Method: {
+    status_name: {
         type: String,
         require: true
     },
     Description: {
+        type: String,
+        require: true
+    },
+    Comment: {
         type: String,
         require: true
     }
@@ -21,4 +25,4 @@ const payementSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('payement', payementSchema)
+module.exports = mongoose.model('status', statusModel)

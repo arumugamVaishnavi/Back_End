@@ -1,19 +1,16 @@
 const mongoose = require("mongoose");
 
-const statusSchema = new mongoose.Schema({
-    ID_status: {
+const historyStatusSchema = new mongoose.Schema({
+    id_histo_status: {
         type: Number,
         require: true,
     },
-    status_name: {
-        type: String,
+    id_status: {
+        type: Number,
         require: true
     },
-    Description: {
-        type: String,
-        require: true
-    },
-    Comment: {
+    
+    comment: {
         type: String,
         require: true
     }
@@ -25,4 +22,4 @@ const statusSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('status', statusSchema)
+module.exports = mongoose.model('historyStatus', historyStatusSchema)

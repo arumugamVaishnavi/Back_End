@@ -28,7 +28,7 @@ router.get('/:id', (req, res, next) => {
 })
 
 
-router.post('/', function (req, res, next) {
+router.post('/rate', function (req, res, next) {
    
 
     let rate = new rateModel({
